@@ -12,13 +12,19 @@
     </header>
     <main>
       <section>
-        <header id="city-container"></header>
-        <ul id="current-weather-data"></ul>
+        <h2 id="city-name"></h2>
+        <h3 id="sky"></h3>
+        <ul id="current-weather-data">
+          <li id="current-temp"></li>
+          <li id="current-wind"></li>
+          <li id="current-humidity"></li>
+          <li id="current-uv"></li>
+        </ul>
       </section>
       <section id="forecast-container">5 Day Forecast</section>
       <aside class="search-container">
         <p>Search for a City</p>
-        <input type="text" placeholder="City, State" />
+        <input id="search-input" type="text" placeholder="City, State" />
         <button id="search-button">Search</button>
       </aside>
     </main>
