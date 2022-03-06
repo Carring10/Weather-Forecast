@@ -30,28 +30,31 @@ searchButton.addEventListener("click", function () {
         // To give HTML data.
         cityName.innerHTML = data.name;
         sky.innerHTML = data.weather[0].description;
-        currentTemp.innerHTML = "Temperature: " + data.main.temp + "\u00B0F";
-        currentWind.innerHTML = "Wind Speed: " + data.wind.speed + " MPH";
-        currentHumidity.innerHTML = "Humidity: " + data.main.humidity + " %";
-        // Another API for UV index.
-        console.log(data.coord.lat);
-        var requestUV =
-          "http://api.openweathermap.org/geo/1.0/direct?q=" +
-          data.coord.lat +
-          data.coord.lon +
-          "&appid=" +
-          APIKey;
-
+        currentTemp.innerHTML = "Temperature : " + data.main.temp + "\u00B0F";
+        currentWind.innerHTML = "Wind Speed : " + data.wind.speed + " MPH";
+        currentHumidity.innerHTML = "Humidity : " + data.main.humidity + " %";
         function getUV() {
+          console.log(data);
+          var requestUV =
+            "http://api.openweathermap.org/data/2.5/onecall?lat=" +
+            data.coord.lat +
+            "&lon=" +
+            data.coord.lon +
+            "&appid=" +
+            APIKey;
+          console.log(requestUV);
           fetch(requestUV)
             .then(function (response) {
-              console.log(response);
-              console.log(response.json());
-              return response.json();
+              if (response.ok) {
+                console.log(response);
+                return response.json();
+              } else {
+                return Promise.reject(response);
+              }
             })
-            .then(function (uvData) {
-              console.log(uvData);
-              currentUV.innerHTML = "UV Index: " + uvData.uvi;
+            .then(function (data) {
+              console.log(data);
+              currentUV.innerHTML = "UV Index: " + data.current.uvi;
             });
         }
         getUV();
