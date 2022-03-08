@@ -6,11 +6,9 @@ var currentTemp = document.getElementById("current-temp");
 var currentWind = document.getElementById("current-wind");
 var currentHumidity = document.getElementById("current-humidity");
 var currentUV = document.getElementById("current-uv");
-// var dayContainer = document.getElementById("day-container");
 var searchButton = document.getElementById("search-button");
 var APIKey = "5cc4264c8766b40941f334fc52eb29b6";
 
-var newSearch = 0;
 searchButton.addEventListener("click", function () {
   var citySearch = document.getElementById("search-input");
   var requestURL =
@@ -119,4 +117,15 @@ searchButton.addEventListener("click", function () {
       });
   }
   getWeatherData();
+  // Store user's search history into local storage.
+  var userCities = localStorage.getItem("City");
+  if (!userCities) {
+    var cityArr = [];
+    cityArr.push(citySearch.value);
+    localStorage.setItem("City", JSON.stringify(cityArr));
+  } else {
+    var cityArr = JSON.parse(userCities);
+    cityArr.push(citySearch.value);
+    localStorage.setItem("City", JSON.stringify(cityArr));
+  }
 });
