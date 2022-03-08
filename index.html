@@ -14,6 +14,7 @@
       <section>
         <h2 id="city-name">--</h2>
         <h3 id="sky">--</h3>
+        <div id="icon"><img id="weather-icon" src="" alt="Weather icon" /></div>
         <ul id="current-weather-data">
           <li id="current-temp">Temperature :</li>
           <li id="current-wind">Wind Speed :</li>
@@ -21,12 +22,21 @@
           <li id="current-uv">UV Index :</li>
         </ul>
       </section>
-      <section id="forecast-container">5 Day Forecast</section>
+
       <aside class="search-container">
         <p>Search for a City</p>
-        <input id="search-input" type="text" placeholder="City, State" />
+        <input
+          id="search-input"
+          type="text"
+          placeholder="City, State"
+          value="Charlotte"
+        />
         <button id="search-button">Search</button>
       </aside>
+      <section>
+        <h2>5 Day Forecast</h2>
+        <div id="forecast-container"></div>
+      </section>
     </main>
     <script src="./script.js"></script>
   </body>
