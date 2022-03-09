@@ -1,0 +1,174 @@
+:root {
+  --main-bg-color: #2f4550;
+  --accent-color: #7390a1;
+  --border: 1.5px solid black;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Titillium Web", sans-serif;
+  letter-spacing: 1.5px;
+  color: white;
+}
+
+body {
+  background-color: #202f36;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+  border: var(--border);
+  border-radius: 3px;
+  box-shadow: 0 0 30px #f1da7c;
+  background-color: var(--main-bg-color);
+}
+
+h1 {
+  text-align: center;
+  padding: 30px;
+  font-weight: normal;
+  font-size: 60px;
+}
+
+.current-weather-and-aside {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
+#city-name {
+  font-size: 50px;
+  font-weight: normal;
+}
+
+#sky {
+  color: var(--accent-color);
+}
+
+.current-weather {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: 10px;
+  margin: 15px;
+  border-radius: 3px;
+}
+
+.current-weather #current-uv-span {
+  padding: 0 5px;
+  border-radius: 3px;
+  line-height: auto;
+}
+
+.current-weather #current-uv-span.favorable {
+  background-color: green;
+}
+
+.current-weather #current-uv-span.moderate {
+  background-color: yellow;
+}
+
+.current-weather #current-uv-span.severe {
+  background-color: crimson;
+}
+
+#current-weather-data {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 20px;
+}
+
+.search-container {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-top: 15px;
+  font-size: 30px;
+  margin-top: 15px;
+}
+
+.search-container p {
+  margin-bottom: 15px;
+}
+
+#search-input {
+  padding: 5px;
+  margin-bottom: 5px;
+  width: 100%;
+  color: var(--main-bg-color);
+  border: var(--border);
+  border-radius: 5px;
+}
+
+#search-button {
+  width: 100%;
+  padding: 2px;
+  color: var(--main-bg-color);
+  border: var(--border);
+  background-color: #f1da7c;
+  font-size: 18px;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+#search-button:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.cityBtn {
+  width: 100%;
+  padding: 2px;
+  color: white;
+  border: var(--border);
+  background-color: var(--accent-color);
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.cityBtn:hover {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+.future-forecast {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 15px;
+}
+
+.future-forecast h2 {
+  text-align: center;
+  align-self: center;
+  font-weight: normal;
+  font-size: 40px;
+  border-bottom: 2px solid var(--accent-color);
+  width: 30%;
+}
+
+#forecast-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.card {
+  margin: 20px;
+  border-left: 1px dashed var(--accent-color);
+  padding-left: 20px;
+}
+
+.card h3 {
+}
+
+.card img {
+  padding-left: 15px;
+}

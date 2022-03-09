@@ -5,7 +5,7 @@ var currentWeatherData = document.getElementById("current-weather-data");
 var currentTemp = document.getElementById("current-temp");
 var currentWind = document.getElementById("current-wind");
 var currentHumidity = document.getElementById("current-humidity");
-var currentUV = document.getElementById("current-uv");
+var currentUV = document.getElementById("current-uv-span");
 var searchButton = document.getElementById("search-button");
 var APIKey = "5cc4264c8766b40941f334fc52eb29b6";
 
@@ -60,7 +60,14 @@ function getWeatherData(city) {
               "Wind Speed : " + data.current.wind_speed + " MPH";
             currentHumidity.innerHTML =
               "Humidity : " + data.current.humidity + " %";
-            currentUV.innerHTML = "UV Index: " + data.current.uvi;
+            currentUV.innerHTML = data.current.uvi;
+            if (data.current.uvi >= 6) {
+              currentUV.classList.add("severe");
+            } else if (data.current.uvi <= 5 && data.current.uvi >= 3) {
+              currentUV.classList.add("moderate");
+            } else {
+              currentUV.classList.add("favorable");
+            }
 
             // Set the container that holds the 5 day forecast to an empty string so each iteration of the for loop does not create endless elements.
             var forecastContainer =
@@ -71,6 +78,7 @@ function getWeatherData(city) {
             for (let i = 1; i < 6; i++) {
               // Make HTML for future forecasts.
               var card = document.createElement("div");
+              card.setAttribute("class", "card");
               var cardDate = document.createElement("h3");
               var cardTemp = document.createElement("p");
               var cardWind = document.createElement("p");
@@ -94,13 +102,14 @@ function getWeatherData(city) {
               cardDate.textContent = formattedDate;
               cardTemp.textContent =
                 "Temperature : " + data.daily[i].temp.day + "\u00B0F";
-              cardHumidity.textContent = "Humidity : " + data.daily[i].humidity;
+              cardHumidity.textContent =
+                "Humidity : " + data.daily[i].humidity + " %";
               cardWind.textContent =
                 "Wind : " + data.daily[i].wind_speed + " MPH";
               // Display onto page.
               forecastContainer.appendChild(card);
-              card.append(cardImg);
               card.append(cardDate);
+              card.append(cardImg);
               card.append(cardTemp);
               card.append(cardHumidity);
               card.append(cardWind);
@@ -114,9 +123,12 @@ function getWeatherData(city) {
     });
 }
 
+getWeatherData("Charlotte");
 searchButton.addEventListener("click", function () {
   var citySearch = document.getElementById("search-input");
-
+  if (!citySearch.value) {
+    return null;
+  }
   getWeatherData(citySearch.value);
   // Store user's search history into local storage.
   var userCities = localStorage.getItem("City");
@@ -134,27 +146,29 @@ searchButton.addEventListener("click", function () {
     // Push the user's search into that array...
     cityArr.push(citySearch.value);
     // Convert array with duplicates to a Set using the spread operator (unpacks elements), the new Set removes duplicates, the output is an array.
-    var removeDuplicates = [...new Set(cityArr)];
+    var uniqueCitiesArr = [...new Set(cityArr)];
     // Convert it back into a string to be stored in local storage along with their previous searches.
-    localStorage.setItem("City", JSON.stringify(removeDuplicates));
-    console.log(removeDuplicates);
+    localStorage.setItem("City", JSON.stringify(uniqueCitiesArr));
+    console.log(uniqueCitiesArr);
   }
 
   var prevSearch = document.getElementById("prev-search-container");
   prevSearch.innerHTML = "";
-
-  if (!removeDuplicates) {
+  if (!uniqueCitiesArr) {
+    console.log(uniqueCitiesArr);
     var btn = document.createElement("button");
     btn.innerHTML = citySearch.value;
   } else {
-    for (var i = 0; i < removeDuplicates.length; i++) {
-      var cityBtn = document.createElement("button");
-      cityBtn.innerHTML = removeDuplicates[i];
-      prevSearch.appendChild(cityBtn);
-      cityBtn.addEventListener("click", function () {
-        console.log(cityBtn);
-        getWeatherData(cityBtn.innerText);
-      });
+    for (var i = 0; i < uniqueCitiesArr.length; i++) {
+      (function () {
+        var cityBtn = document.createElement("button");
+        cityBtn.innerHTML = uniqueCitiesArr[i];
+        cityBtn.setAttribute("class", "cityBtn");
+        prevSearch.appendChild(cityBtn);
+        cityBtn.addEventListener("click", function () {
+          getWeatherData(cityBtn.innerText);
+        });
+      })();
     }
   }
 });

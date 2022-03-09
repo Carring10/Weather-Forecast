@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&family=Titillium+Web&display=swap"
+      rel="stylesheet"
+    />
     <title>Weather Forecast</title>
   </head>
   <body>
@@ -11,30 +16,31 @@
       <h1>Weather Forecast</h1>
     </header>
     <main>
-      <section>
-        <h2 id="city-name">--</h2>
-        <h3 id="sky">--</h3>
-        <div id="icon"><img id="weather-icon" src="" alt="Weather icon" /></div>
-        <ul id="current-weather-data">
-          <li id="current-temp">Temperature :</li>
-          <li id="current-wind">Wind Speed :</li>
-          <li id="current-humidity">Humidity :</li>
-          <li id="current-uv">UV Index :</li>
-        </ul>
-      </section>
+      <div class="current-weather-and-aside">
+        <section class="current-weather">
+          <h2 id="city-name">--</h2>
+          <h3 id="sky">--</h3>
+          <div id="icon">
+            <img id="weather-icon" src="" alt="Weather icon" />
+          </div>
+          <ul id="current-weather-data">
+            <li id="current-temp">Temperature :</li>
+            <li id="current-wind">Wind Speed :</li>
+            <li id="current-humidity">Humidity :</li>
+            <li id="current-uv">
+              UV Index : <span id="current-uv-span"></span>
+            </li>
+          </ul>
+        </section>
 
-      <aside class="search-container">
-        <p>Search for a City</p>
-        <input
-          id="search-input"
-          type="text"
-          placeholder="City, State"
-          value="Charlotte"
-        />
-        <button id="search-button">Search</button>
-        <div id="prev-search-container"></div>
-      </aside>
-      <section>
+        <aside class="search-container">
+          <p>Search for a City</p>
+          <input id="search-input" type="text" placeholder="Search..." />
+          <button id="search-button">Search</button>
+          <div id="prev-search-container"></div>
+        </aside>
+      </div>
+      <section class="future-forecast">
         <h2>5 Day Forecast</h2>
         <div id="forecast-container"></div>
       </section>
