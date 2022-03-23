@@ -46,7 +46,7 @@ function getWeatherData(city) {
             console.log(data);
             // Convert icon from url to an img.
             var iconCode = data.current.weather[0].icon;
-            var iconURL = "http://openweathermap.org/img/w/" + iconCode + ".png";
+            var iconURL = "https://openweathermap.org/img/w/" + iconCode + ".png";
             document.getElementById("weather-icon").src = iconURL;
 
             sky.innerHTML = data.current.weather[0].description;

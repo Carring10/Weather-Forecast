@@ -1,6 +1,6 @@
 # Weather-Forecast
 
-[link to Site]{https://carring10.github.io/Weather-Forecast/}
+[link to Site](https://carring10.github.io/Weather-Forecast/)
 
 ## Description
 
