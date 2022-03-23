@@ -11,10 +11,7 @@ var APIKey = "5cc4264c8766b40941f334fc52eb29b6";
 
 function getWeatherData(city) {
   var requestURL =
-    "http://api.openweathermap.org/geo/1.0/direct?q=" +
-    city +
-    "&appid=" +
-    APIKey;
+    "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + APIKey;
   // The geolocation API call that takes the city input as a parameter.
   fetch(requestURL)
     .then(function (response) {
@@ -27,7 +24,7 @@ function getWeatherData(city) {
       function forecastWeather() {
         // Convert the city name parameter into latitude and longitude for Onecall API.
         var forecastWeather =
-          "http://api.openweathermap.org/data/2.5/onecall?lat=" +
+          "https://api.openweathermap.org/data/2.5/onecall?lat=" +
           coordinateData[0].lat +
           "&lon=" +
           coordinateData[0].lon +
@@ -49,17 +46,13 @@ function getWeatherData(city) {
             console.log(data);
             // Convert icon from url to an img.
             var iconCode = data.current.weather[0].icon;
-            var iconURL =
-              "http://openweathermap.org/img/w/" + iconCode + ".png";
+            var iconURL = "http://openweathermap.org/img/w/" + iconCode + ".png";
             document.getElementById("weather-icon").src = iconURL;
 
             sky.innerHTML = data.current.weather[0].description;
-            currentTemp.innerHTML =
-              "Temperature : " + data.current.temp + "\u00B0F";
-            currentWind.innerHTML =
-              "Wind Speed : " + data.current.wind_speed + " MPH";
-            currentHumidity.innerHTML =
-              "Humidity : " + data.current.humidity + " %";
+            currentTemp.innerHTML = "Temperature : " + data.current.temp + "\u00B0F";
+            currentWind.innerHTML = "Wind Speed : " + data.current.wind_speed + " MPH";
+            currentHumidity.innerHTML = "Humidity : " + data.current.humidity + " %";
             currentUV.innerHTML = data.current.uvi;
             if (data.current.uvi >= 6) {
               currentUV.classList.add("severe");
@@ -70,8 +63,7 @@ function getWeatherData(city) {
             }
 
             // Set the container that holds the 5 day forecast to an empty string so each iteration of the for loop does not create endless elements.
-            var forecastContainer =
-              document.getElementById("forecast-container");
+            var forecastContainer = document.getElementById("forecast-container");
             forecastContainer.innerHTML = "";
 
             // Displays weather for the next 5 days.
@@ -86,26 +78,18 @@ function getWeatherData(city) {
               // Convert icon code to an image.
               var cardImg = document.createElement("img");
               var iconCode = data.daily[i].weather[0].icon;
-              var iconURL =
-                "http://openweathermap.org/img/w/" + iconCode + ".png";
+              var iconURL = "http://openweathermap.org/img/w/" + iconCode + ".png";
               // Convert unix time to date.
               var date = new Date(data.daily[i].dt * 1000);
               var formattedDate =
-                date.getMonth() +
-                1 +
-                "/" +
-                date.getDate() +
-                "/" +
-                date.getFullYear();
+                date.getMonth() + 1 + "/" + date.getDate() + "/" + date.getFullYear();
               // Give HTML data.
               cardImg.src = iconURL;
               cardDate.textContent = formattedDate;
               cardTemp.textContent =
                 "Temperature : " + data.daily[i].temp.day + "\u00B0F";
-              cardHumidity.textContent =
-                "Humidity : " + data.daily[i].humidity + " %";
-              cardWind.textContent =
-                "Wind : " + data.daily[i].wind_speed + " MPH";
+              cardHumidity.textContent = "Humidity : " + data.daily[i].humidity + " %";
+              cardWind.textContent = "Wind : " + data.daily[i].wind_speed + " MPH";
               // Display onto page.
               forecastContainer.appendChild(card);
               card.append(cardDate);
