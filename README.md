@@ -6,4 +6,4 @@
 
 ## Visuals
 
-[!image of Weather Forecast](images/Weather-api.png)
+![image of Weather Forecast](images/Weather-api.png)
